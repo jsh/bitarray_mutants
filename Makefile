@@ -3,7 +3,7 @@ all: lint test
 clean:
 	@ git clean -dfx
 
-lint:
+lint: wild_type
 	@ isort *.py
 	@ pylama *.py
 	@ pylama -l radon *.py
