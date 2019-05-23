@@ -1,0 +1,4 @@
+st = 'hello, world'
+' '.join('{0:08b}'.format(ord(x), 'b') for x in st)
+
+'{0:08b}'.format(2)

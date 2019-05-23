@@ -53,3 +53,9 @@ def test_bitops():
     assert three | six == seven
     assert three & six == two
     assert three ^ six == five
+
+
+def test_to01():
+    s = '0111101'
+    x = bitarray('10111101')
+    assert int(x.to01()[2:]) == int(s)

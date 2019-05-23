@@ -1,6 +1,0 @@
-[
-  "test_bitarray.py::test_construction",
-  "test_bitarray.py::test_write",
-  "test_bitarray.py::test_read",
-  "test_bitarray.py::test_bitops"
-]
