@@ -4,26 +4,22 @@ import os
 
 from make_files import make_files
 
-'''
 import shutil
-'''
 
 
-test_dir = 'td'
+test_dir = os.path.join(os.getcwd(), 'td')
 nfiles = 100000
 
 
 def test_make_files():
-    os.mkdir(test_dir)
+    try:
+        os.mkdir(test_dir)
+    except FileExistsError:
+        shutil.rmtree(test_dir)
+        os.mkdir(test_dir)
     os.chdir(test_dir)
     make_files(nfiles)
-    os.chdir('..')
 
-    tot = 0
-    for subdir in os.listdir(test_dir):
-        tot += len(os.listdir(os.path.join(test_dir, subdir)))
-
-    assert tot == nfiles
-    '''
+    file_count = sum(len(files) for _, _, files in os.walk(test_dir))
+    assert file_count == nfiles
     shutil.rmtree(test_dir)
-    '''
