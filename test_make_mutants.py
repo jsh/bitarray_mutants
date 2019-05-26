@@ -9,6 +9,7 @@ from make_mutants import get_mutants, make_mutants
 test_dir = os.path.join(os.getcwd(), 'td')
 nfiles = 100
 lim = 2 * nfiles
+loci = [2 * pos for pos in range(nfiles)]
 
 wild_type = os.path.join(os.getcwd(), 'wild_type')
 
@@ -37,6 +38,21 @@ def test_make_empty_mutants_random():
 
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim, mode='random')
+    os.chdir('..')
+
+    assert sum(True for mutant in get_mutants(test_dir)) == nfiles
+    shutil.rmtree(test_dir)
+
+
+def test_make_empty_mutants_list():
+    try:
+        os.mkdir(test_dir)
+    except FileExistsError:
+        shutil.rmtree(test_dir)
+        os.mkdir(test_dir)
+
+    os.chdir(test_dir)
+    make_mutants(nfiles, lim=lim, mode='list', loci=loci)
     os.chdir('..')
 
     assert sum(True for mutant in get_mutants(test_dir)) == nfiles

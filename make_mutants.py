@@ -40,7 +40,8 @@ def make_mutants(
         lim=None,
         mode='serial',
         mutation=mutate.empty,
-        wt=mutate.wild_type
+        wt=mutate.wild_type,
+        loci=None
         ):
 
     '''Make n files with names in the range [0,lim-1]'''
@@ -50,6 +51,9 @@ def make_mutants(
 
     if mode == 'random':
         nums = random.sample(range(lim), n)
+    elif mode == 'list':
+        assert len(loci) <= lim
+        nums = loci
     else:
         nums = range(n)  # all
 
