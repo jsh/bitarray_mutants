@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
+import os
 import shutil
 
 import mutate
 from make_mutants import make_mutants
+
 
 def make_test_dir():
     test_dir = os.path.join(os.getcwd(), 'td')
@@ -22,5 +24,3 @@ def make_test_dir():
                  wt=wild_type, mutation=mutate.point)
     os.chdir('..')
     return test_dir
-
-
