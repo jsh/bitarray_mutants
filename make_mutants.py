@@ -35,7 +35,14 @@ def get_path(n, width):
     return ''.join(p)
 
 
-def make_mutants(n, lim=None, mode='serial', make_mutant=mutate.empty):
+def make_mutants(
+        n,
+        lim=None,
+        mode='serial',
+        mutation=mutate.empty,
+        wt=mutate.wild_type
+        ):
+
     '''Make n files with names in the range [0,lim-1]'''
     if lim is None:
         lim = n
@@ -52,4 +59,4 @@ def make_mutants(n, lim=None, mode='serial', make_mutant=mutate.empty):
         directory = os.path.dirname(path)
         if not os.path.isdir(directory):
             os.makedirs(directory)
-        make_mutant(wt=mutate.wild_type, mut=path, pos=i)
+        mutation(wt=wt, mut=path, pos=i)
