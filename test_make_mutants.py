@@ -4,7 +4,7 @@ import os
 import shutil
 
 import mutate
-from make_mutants import make_mutants, get_mutants
+from make_mutants import get_mutants, make_mutants
 
 test_dir = os.path.join(os.getcwd(), 'td')
 nfiles = 100

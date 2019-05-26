@@ -2,6 +2,8 @@
 
 import subprocess
 
+from make_mutants import get_mutants
+
 
 def run_one(code):
     '''Run the code and report the result.'''
@@ -26,3 +28,9 @@ def run_one(code):
 
     return (outcome, returncode)
 
+
+def run_dir(directory, results):
+    with open(results, 'w') as f:
+        for mutant in get_mutants(directory):
+            outcome, returncode = run_one(mutant)
+            f.write('{}\t{}\t{:>3d}\n'.format(mutant, outcome, returncode))

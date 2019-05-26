@@ -19,6 +19,7 @@ def point(wt=wild_type, mut=mutant, pos=None):
         bna[pos] = not bna[pos]
     with open(mut, 'wb') as f:
         bna.tofile(f)
+    os.chmod(mut, 0o775)
 
 
 def empty(wt=None, mut=None, pos=None):

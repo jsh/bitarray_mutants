@@ -63,6 +63,6 @@ def make_mutants(
 
 
 def get_mutants(directory):
-   for dirpath,_,filenames in os.walk(directory):
-       for f in filenames:
-           yield os.path.join(dirpath, f)
+    for dirpath, _, filenames in os.walk(directory):
+        for f in filenames:
+            yield os.path.join(dirpath, f)
