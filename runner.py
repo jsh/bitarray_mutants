@@ -15,16 +15,17 @@ def run_one(code):
             code,
             timeout=timeout,
             stderr=subprocess.STDOUT)
-        outcome = '+' if output else '-'  # expect '-', but who knows?
+        outcome = 'output ' if output else 'silent '
+        # expect 'silent ' but who knows?
     except subprocess.CalledProcessError as err:
-        outcome = 'c'
+        outcome = 'process'
         returncode = err.returncode
     except OSError:
-        outcome = 'o'
+        outcome = 'oserror'
     except subprocess.TimeoutExpired:
-        outcome = 't'
+        outcome = 'timeout'
     except Exception:              # some other misfortune
-        outcome = 'e'
+        outcome = 'exceptn'
 
     return (outcome, returncode)
 

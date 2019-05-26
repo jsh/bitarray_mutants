@@ -5,22 +5,11 @@ import shutil
 
 import mutate
 from make_mutants import get_mutants, make_mutants
-
-test_dir = os.path.join(os.getcwd(), 'td')
-nfiles = 100
-lim = 2 * nfiles
-loci = [2 * pos for pos in range(nfiles)]
-
-wild_type = os.path.join(os.getcwd(), 'wild_type')
+from util import get_test_dir, lim, loci, nfiles, wild_type
 
 
 def test_make_empty_mutants_serial():
-    try:
-        os.mkdir(test_dir)
-    except FileExistsError:
-        shutil.rmtree(test_dir)
-        os.mkdir(test_dir)
-
+    test_dir = get_test_dir()
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim)
     os.chdir('..')
@@ -30,12 +19,7 @@ def test_make_empty_mutants_serial():
 
 
 def test_make_empty_mutants_random():
-    try:
-        os.mkdir(test_dir)
-    except FileExistsError:
-        shutil.rmtree(test_dir)
-        os.mkdir(test_dir)
-
+    test_dir = get_test_dir()
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim, mode='random')
     os.chdir('..')
@@ -45,12 +29,7 @@ def test_make_empty_mutants_random():
 
 
 def test_make_empty_mutants_list():
-    try:
-        os.mkdir(test_dir)
-    except FileExistsError:
-        shutil.rmtree(test_dir)
-        os.mkdir(test_dir)
-
+    test_dir = get_test_dir()
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim, mode='list', loci=loci)
     os.chdir('..')
@@ -60,12 +39,7 @@ def test_make_empty_mutants_list():
 
 
 def test_make_point_mutants_random():
-    try:
-        os.mkdir(test_dir)
-    except FileExistsError:
-        shutil.rmtree(test_dir)
-        os.mkdir(test_dir)
-
+    test_dir = get_test_dir()
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim, mode='random',
                  wt=wild_type, mutation=mutate.point)
