@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 
 import os
-
-from make_files import make_files
-
 import shutil
 
+from make_files import make_files
 
 test_dir = os.path.join(os.getcwd(), 'td')
 nfiles = 100000

@@ -4,8 +4,8 @@ import os
 from bitarray import bitarray
 
 kba = bitarray()
-bytes_1k = 8*2**10
-kba.extend(bytes_1k*[False])
+bytes_1k = 8 * (2 ** 10)
+kba.extend(bytes_1k * [False])
 
 
 def test_construction():
@@ -22,7 +22,7 @@ def test_construction():
 def test_write():
     with open('new', 'wb') as filehandle:
         kba.tofile(filehandle)
-    assert os.path.getsize('new') == len(kba)/8
+    assert os.path.getsize('new') == len(kba) / 8
     os.remove('new')
 
 
