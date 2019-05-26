@@ -4,27 +4,27 @@ import os
 
 from bitarray import bitarray
 
-from mutate import mutate
-
-wild_type = 'wild_type'
-mutant = 'mutant'
-wt_bitcount = os.path.getsize(wild_type)*8
-blank = bitarray(wt_bitcount)
-blank.setall(0)
+import mutate
 
 
-def test_mutate():
+def test_empty():
+    mutate.empty(mut=mutate.mutant)
+    assert os.path.isfile(mutate.mutant)
+    assert os.path.getsize(mutate.mutant) == 0
+
+
+def test_point():
     pos = 10
-    mutate(wild_type, mutant, 10)
-    wt = bitarray()
-    with open(wild_type, 'rb') as f:
-        wt.fromfile(f)
+    mutate.point(wt=mutate.wild_type, mut=mutate.mutant, pos=10)
+    wt_bna = bitarray()
+    with open(mutate.wild_type, 'rb') as f:
+        wt_bna.fromfile(f)
 
-    mut = bitarray()
-    with open(mutant, 'rb') as f:
-        mut.fromfile(f)
+    mut_bna = bitarray()
+    with open(mutate.mutant, 'rb') as f:
+        mut_bna.fromfile(f)
 
-    mask = blank
+    mask = mutate.blank
     mask[pos] = 1
-    assert wt ^ mut == mask
-    os.remove(mutant)
+    assert wt_bna ^ mut_bna == mask
+    os.remove(mutate.mutant)

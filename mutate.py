@@ -1,12 +1,26 @@
 #!/usr/bin/env python
 
 from bitarray import bitarray
+import os
 
 
-def mutate(old_file, new_file, pos):
-    ba = bitarray()
-    with open(old_file, 'rb') as f:
-        ba.fromfile(f)
-    ba[pos] = not ba[pos]
-    with open(new_file, 'wb') as f:
-        ba.tofile(f)
+wild_type = 'wild_type'
+mutant = 'mutant'
+wt_bitcount = os.path.getsize(wild_type)*8
+blank = bitarray(wt_bitcount)
+blank.setall(0)
+
+
+def point(wt=wild_type, mut=mutant, pos=None):
+    bna = bitarray()
+    with open(wt, 'rb') as f:
+        bna.fromfile(f)
+    if pos is not None:
+        bna[pos] = not bna[pos]
+    with open(mut, 'wb') as f:
+        bna.tofile(f)
+
+
+def empty(wt=None, mut=None, pos=None):
+    f = open(mutant, 'w')
+    f.close()
