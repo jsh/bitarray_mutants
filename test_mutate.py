@@ -27,3 +27,4 @@ def test_mutate():
     mask = blank
     mask[pos] = 1
     assert wt ^ mut == mask
+    os.remove(mutant)

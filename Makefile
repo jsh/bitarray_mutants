@@ -9,7 +9,7 @@ lint: wild_type
 	@ pylama -l radon *.py
 
 test: wild_type
-	@ pytest
+	@ pytest test*.py
 
 wild_type: /usr/bin/true
 	@ cp /usr/bin/true wild_type

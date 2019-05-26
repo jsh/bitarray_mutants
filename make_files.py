@@ -14,13 +14,13 @@ def get_path(n, width):
     so 0 -> 00000...0 -> ('00/00', '0...0')
 
     >>> get_path(10, 2)
-    './a'
+    './0a'
     >>> get_path(0,3)
     '00/0'
     >>> get_path(15,10)
     '00/00/00000f'
     '''
-    fmt = '0' + width + 'x'
+    fmt = '0' + str(width) + 'x'
     s = format(n, fmt)
     assert len(s) <= width
     p = list(s)
@@ -42,12 +42,13 @@ def make_files(n, lim=None, mode='serial'):
     if mode == 'random':
         nums = random.sample(range(lim), n)
     else:
-        nums = range(n)
+        nums = range(n)  # all
 
-    width = len(format(lim - 1, 'x'))  # length of hex representation of largest
+    width = len(format(lim - 1, 'x'))  # hex of largest
     for i in nums:
-        directory, file = get_path(i, width)
+        path = get_path(i, width)
+        directory = os.path.dirname(path)
         if not os.path.isdir(directory):
             os.makedirs(directory)
-        f = open(os.path.join(directory, file), 'w')
+        f = open(path, 'w')
         f.close()
