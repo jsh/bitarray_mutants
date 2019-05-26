@@ -4,7 +4,7 @@ import os
 import shutil
 
 import mutate
-from make_mutants import make_mutants
+from make_mutants import make_mutants, get_mutants
 
 test_dir = os.path.join(os.getcwd(), 'td')
 nfiles = 100
@@ -24,8 +24,7 @@ def test_make_empty_mutants_serial():
     make_mutants(nfiles, lim=lim)
     os.chdir('..')
 
-    file_count = sum(len(files) for _, _, files in os.walk(test_dir))
-    assert file_count == nfiles
+    assert sum(True for mutant in get_mutants(test_dir)) == nfiles
     shutil.rmtree(test_dir)
 
 
@@ -40,8 +39,7 @@ def test_make_empty_mutants_random():
     make_mutants(nfiles, lim=lim, mode='random')
     os.chdir('..')
 
-    file_count = sum(len(files) for _, _, files in os.walk(test_dir))
-    assert file_count == nfiles
+    assert sum(True for mutant in get_mutants(test_dir)) == nfiles
     shutil.rmtree(test_dir)
 
 
@@ -57,6 +55,5 @@ def test_make_point_mutants_random():
                  wt=wild_type, mutation=mutate.point)
     os.chdir('..')
 
-    file_count = sum(len(files) for _, _, files in os.walk(test_dir))
-    assert file_count == nfiles
+    assert sum(True for mutant in get_mutants(test_dir)) == nfiles
     shutil.rmtree(test_dir)

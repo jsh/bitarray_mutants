@@ -60,3 +60,9 @@ def make_mutants(
         if not os.path.isdir(directory):
             os.makedirs(directory)
         mutation(wt=wt, mut=path, pos=i)
+
+
+def get_mutants(directory):
+   for dirpath,_,filenames in os.walk(directory):
+       for f in filenames:
+           yield os.path.join(dirpath, f)
