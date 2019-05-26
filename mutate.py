@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from bitarray import bitarray
 import os
 
+from bitarray import bitarray
 
 wild_type = 'wild_type'
 mutant = 'mutant'
@@ -22,5 +22,5 @@ def point(wt=wild_type, mut=mutant, pos=None):
 
 
 def empty(wt=None, mut=None, pos=None):
-    f = open(mutant, 'w')
+    f = open(mut, 'w')
     f.close()

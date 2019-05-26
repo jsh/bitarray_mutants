@@ -3,6 +3,8 @@
 import os
 import random
 
+import mutate
+
 
 def get_path(n, width):
     '''Make a filepath representing an int
@@ -33,7 +35,7 @@ def get_path(n, width):
     return ''.join(p)
 
 
-def make_files(n, lim=None, mode='serial'):
+def make_mutants(n, lim=None, mode='serial', make_mutant=mutate.empty):
     '''Make n files with names in the range [0,lim-1]'''
     if lim is None:
         lim = n
@@ -50,5 +52,4 @@ def make_files(n, lim=None, mode='serial'):
         directory = os.path.dirname(path)
         if not os.path.isdir(directory):
             os.makedirs(directory)
-        f = open(path, 'w')
-        f.close()
+        make_mutant(wt=mutate.wild_type, mut=path, pos=i)
