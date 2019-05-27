@@ -7,6 +7,9 @@ from make_mutants import make_mutants
 from runner import run_dir
 from util import get_test_dir, lim, nfiles, wild_type
 
+lim = os.path.getsize(wild_type)
+nfiles = 400
+
 
 def run_empty():
     results = 'results.empty'
