@@ -20,6 +20,12 @@ def test_false():
     assert returncode == 1
 
 
+def test_empty():
+    outcome, returncode = run_one('empty')
+    assert outcome == 'silent '
+    assert returncode == 0
+
+
 def test_run_dir():
     results = 'results'
     test_dir = get_test_dir()

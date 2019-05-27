@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import subprocess
 
 from make_mutants import get_mutants
@@ -21,7 +22,10 @@ def run_one(code):
         outcome = 'process'
         returncode = err.returncode
     except OSError:
-        outcome = 'oserror'
+        if os.path.getsize(code) == 0:
+            outcome = 'silent '  # subprocess bug
+        else:
+            outcome = 'oserror'
     except subprocess.TimeoutExpired:
         outcome = 'timeout'
     except Exception:              # some other misfortune
