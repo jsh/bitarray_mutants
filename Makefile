@@ -1,7 +1,11 @@
-all: lint test
+all: lint test experiment
 
 clean:
 	@ git clean -dfx
+
+result.experiment: result.empty result.frameshift result.point
+	@ ./experiment.py
+	@ touch result.experiment
 
 lint: wild_type
 	@ isort *.py
@@ -9,10 +13,10 @@ lint: wild_type
 	@ pylama -l radon *.py
 
 test: wild_type
-	@ pytest test*.py
+	@ pytest test*.py experiment.py
 
 wild_type: /usr/bin/true
 	@ cp /usr/bin/true wild_type
 
-.PHONY: clean lint test
+.PHONY: clean lint test experiment
 
