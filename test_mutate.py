@@ -15,7 +15,7 @@ def test_empty():
 
 def test_point():
     pos = 10
-    mutate.point(wt=mutate.wild_type, mut=mutate.mutant, pos=10)
+    mutate.point(wt=mutate.wild_type, mut=mutate.mutant, pos=pos)
     wt_bna = bitarray()
     with open(mutate.wild_type, 'rb') as f:
         wt_bna.fromfile(f)
@@ -27,4 +27,20 @@ def test_point():
     mask = mutate.blank
     mask[pos] = 1
     assert wt_bna ^ mut_bna == mask
+    os.remove(mutate.mutant)
+
+
+def test_frameshift():
+    mutate.frameshift(wt=mutate.wild_type, mut=mutate.mutant, pos=10)
+    wt_bna = bitarray()
+    with open(mutate.wild_type, 'rb') as f:
+        wt_bna.fromfile(f)
+
+    mut_bna = bitarray()
+    with open(mutate.mutant, 'rb') as f:
+        mut_bna.fromfile(f)
+
+    assert os.path.getsize(mutate.mutant) == (
+        os.path.getsize(mutate.wild_type) + 1)
+
     os.remove(mutate.mutant)

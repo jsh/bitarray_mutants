@@ -11,6 +11,23 @@ blank = bitarray(wt_bitcount)
 blank.setall(0)
 
 
+def empty(wt=None, mut=None, pos=None):
+    f = open(mut, 'w')
+    f.close()
+    os.chmod(mut, 0o775)
+
+
+def frameshift(wt=wild_type, mut=mutant, pos=None):
+    bna = bitarray()
+    with open(wt, 'rb') as f:
+        bna.fromfile(f)
+    if pos is not None:
+        bna.insert(pos, False)
+    with open(mut, 'wb') as f:
+        bna.tofile(f)
+    os.chmod(mut, 0o775)
+
+
 def point(wt=wild_type, mut=mutant, pos=None):
     bna = bitarray()
     with open(wt, 'rb') as f:
@@ -20,8 +37,3 @@ def point(wt=wild_type, mut=mutant, pos=None):
     with open(mut, 'wb') as f:
         bna.tofile(f)
     os.chmod(mut, 0o775)
-
-
-def empty(wt=None, mut=None, pos=None):
-    f = open(mut, 'w')
-    f.close()
