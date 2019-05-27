@@ -21,11 +21,14 @@ def test_false():
 
 
 def test_run_dir():
-
+    results = 'results'
     test_dir = get_test_dir()
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim, mode='random',
                  wt=wild_type, mutation=mutate.point)
     os.chdir('..')
-    run_dir(test_dir, 'results')
-    assert os.path.isfile('results')
+    run_dir(test_dir, results)
+    assert os.path.isfile(results)
+    with open(results, 'r') as f:
+        assert len(list(f)) == nfiles
+    os.remove(results)
