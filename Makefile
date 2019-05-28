@@ -3,6 +3,9 @@ all: lint test experiment
 clean:
 	@ git clean -dfx
 
+grouped-bar.html: grouped-bar.py
+	@ ./grouped-bar.py
+
 result.experiment: result.empty result.frameshift result.point
 	@ ./experiment.py
 	@ touch result.experiment
