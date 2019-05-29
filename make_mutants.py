@@ -36,7 +36,7 @@ def get_path(n, width):
 
 
 def make_mutants(
-        n,
+        n=0,
         lim=None,
         mode='serial',
         mutation=mutate.empty,
@@ -53,7 +53,7 @@ def make_mutants(
         nums = random.sample(range(lim), n)
     elif mode == 'list':
         assert len(loci) <= lim
-        nums = loci
+        nums = loci             # n is irrelevant
     else:
         nums = range(n)  # all
 
