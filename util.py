@@ -19,3 +19,8 @@ def get_test_dir():
         os.mkdir(test_dir)
 
     return test_dir
+
+def get_test_loci(n):
+    length = os.path.getsize(wild_type)
+    separation = length//n
+    return range(0, length, separation)[:n]
