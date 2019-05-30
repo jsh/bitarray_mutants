@@ -5,9 +5,8 @@ import os
 import mutate
 from make_mutants import make_mutants
 from runner import run_dir
-from util import get_test_dir, lim, nfiles, wild_type
+from util import get_test_dir, wild_type
 
-lim = os.path.getsize(wild_type)
 nfiles = 400
 
 
@@ -15,7 +14,7 @@ def run_empty():
     results = 'results.empty'
     test_dir = get_test_dir()
     os.chdir(test_dir)
-    make_mutants(nfiles, lim=lim, mode='random',
+    make_mutants(nfiles, lim=2*nfiles, mode='random',
                  wt=wild_type, mutation=mutate.empty)
     os.chdir('..')
     run_dir(test_dir, results)
@@ -28,7 +27,7 @@ def run_frameshift():
     results = 'results.frameshift'
     test_dir = get_test_dir()
     os.chdir(test_dir)
-    make_mutants(nfiles, lim=lim, mode='random',
+    make_mutants(nfiles, lim=2*nfiles, mode='random',
                  wt=wild_type, mutation=mutate.frameshift)
     os.chdir('..')
     run_dir(test_dir, results)
@@ -41,7 +40,7 @@ def run_point():
     results = 'results.point'
     test_dir = get_test_dir()
     os.chdir(test_dir)
-    make_mutants(nfiles, lim=lim, mode='random',
+    make_mutants(nfiles, lim=2*nfiles, mode='random',
                  wt=wild_type, mutation=mutate.point)
     os.chdir('..')
     run_dir(test_dir, results)
@@ -55,7 +54,7 @@ def run_list():
     test_dir = get_test_dir()
     os.chdir(test_dir)
     loci = os.path.getsize(wild_type) % 400
-    make_mutants(nfiles, lim=lim, mode='list', loci=loci
+    make_mutants(nfiles, mode='list', loci=loci,
                  wt=wild_type, mutation=mutate.point)
     os.chdir('..')
     run_dir(test_dir, results)

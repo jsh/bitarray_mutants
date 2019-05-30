@@ -3,8 +3,8 @@ all: lint test experiment
 clean:
 	@ git clean -dfx
 
-grouped-bar.html: grouped-bar.py
-	@ ./grouped-bar.py
+graph-mutants.html: graph-mutants.py
+	@ ./graph-mutants.py
 
 result.experiment: result.empty result.frameshift result.point
 	@ ./experiment.py
@@ -16,7 +16,9 @@ lint: wild_type
 	@ pylama -l radon *.py
 
 test: wild_type
+	@ touch empty
 	@ pytest test*.py experiment.py
+	@ rm empty
 
 wild_type: /usr/bin/true
 	@ cp /usr/bin/true wild_type

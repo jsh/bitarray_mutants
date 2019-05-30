@@ -14,5 +14,6 @@ def test_get_test_dir():
     assert os.path.isdir(td)
     os.rmdir(td)
 
+
 def test_get_test_loci():
     assert len(list(get_test_loci(400))) == 400

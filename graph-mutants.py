@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-import plotly.plotly as py
-import plotly.offline as po
 import plotly.graph_objs as go
+import plotly.offline as po
 
 trace1 = go.Bar(
     x=['giraffes', 'orangutans', 'monkeys'],
@@ -21,4 +20,4 @@ layout = go.Layout(
 )
 
 fig = go.Figure(data=data, layout=layout)
-po.plot(fig, filename='grouped-bar.html', auto_open=False)
+po.plot(fig, filename='graph-mutants.html', auto_open=False)

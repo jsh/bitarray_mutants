@@ -5,7 +5,11 @@ import shutil
 
 import mutate
 from make_mutants import get_mutants, make_mutants
-from util import get_test_dir, lim, loci, nfiles, wild_type
+from util import get_test_dir, wild_type
+
+nfiles = 100
+lim = 2*nfiles
+loci = [2 * pos for pos in range(nfiles)]  # mutate even-numbered positions
 
 
 def test_make_empty_mutants_serial():

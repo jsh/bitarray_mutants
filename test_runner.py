@@ -5,7 +5,10 @@ import os
 import mutate
 from make_mutants import make_mutants
 from runner import run_dir, run_one
-from util import get_test_dir, lim, nfiles, wild_type
+from util import get_test_dir, wild_type
+
+nfiles = 100
+lim = 2*nfiles
 
 
 def test_true():

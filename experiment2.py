@@ -5,7 +5,7 @@ import os
 import mutate
 from make_mutants import make_mutants
 from runner import run_dir
-from util import get_test_dir, get_test_loci, lim, nfiles, wild_type
+from util import get_test_dir, get_test_loci, wild_type
 
 lim = os.path.getsize(wild_type)
 nfiles = 400
@@ -39,9 +39,11 @@ def run_point():
     with open(results, 'r') as f:
         assert len(list(f)) == nfiles
 
+
 def main():
     run_frameshift()
     run_point()
+
 
 if __name__ == '__main__':
     main()
