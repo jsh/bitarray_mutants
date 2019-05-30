@@ -8,13 +8,13 @@ from util import get_path
 
 
 def make_mutants(
-        n=0,
-        lim=None,
-        mode='serial',
-        mutation=mutate.empty,
-        wt=mutate.wild_type,
-        loci=None
-        ):
+                 n=0,
+                 lim=None,
+                 mode='serial',
+                 mutation=mutate.empty,
+                 wt=mutate.wild_type,
+                 loci=None
+                 ):
 
     '''Make n files with names in the range [0,lim-1]'''
     if lim is None:

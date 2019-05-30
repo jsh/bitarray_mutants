@@ -11,10 +11,10 @@ nfiles = 400
 
 
 def run_empty():
-    results = 'results.empty'
+    results = 'empty.results'
     test_dir = get_test_dir()
     os.chdir(test_dir)
-    make_mutants(nfiles, lim=2*nfiles, mode='random',
+    make_mutants(nfiles, lim=2 * nfiles, mode='random',
                  wt=wild_type, mutation=mutate.empty)
     os.chdir('..')
     run_dir(test_dir, results)
@@ -24,10 +24,10 @@ def run_empty():
 
 
 def run_frameshift():
-    results = 'results.frameshift'
+    results = 'frameshift.results'
     test_dir = get_test_dir()
     os.chdir(test_dir)
-    make_mutants(nfiles, lim=2*nfiles, mode='random',
+    make_mutants(nfiles, lim=2 * nfiles, mode='random',
                  wt=wild_type, mutation=mutate.frameshift)
     os.chdir('..')
     run_dir(test_dir, results)
@@ -37,10 +37,10 @@ def run_frameshift():
 
 
 def run_point():
-    results = 'results.point'
+    results = 'point.results'
     test_dir = get_test_dir()
     os.chdir(test_dir)
-    make_mutants(nfiles, lim=2*nfiles, mode='random',
+    make_mutants(nfiles, lim=2 * nfiles, mode='random',
                  wt=wild_type, mutation=mutate.point)
     os.chdir('..')
     run_dir(test_dir, results)
@@ -50,7 +50,7 @@ def run_point():
 
 
 def run_list():
-    results = 'results.list'
+    results = 'list.results'
     test_dir = get_test_dir()
     os.chdir(test_dir)
     loci = os.path.getsize(wild_type) % 400

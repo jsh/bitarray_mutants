@@ -6,12 +6,13 @@ from bitarray import bitarray
 
 wild_type = 'wild_type'
 mutant = 'mutant'
-wt_bitcount = os.path.getsize(wild_type)*8
+wt_bitcount = os.path.getsize(wild_type) * 8
 blank = bitarray(wt_bitcount)
 blank.setall(0)
 
 
 def empty(wt=None, mut=None, pos=None):
+    _, _ = wt, pos  # unused
     f = open(mut, 'w')
     f.close()
     os.chmod(mut, 0o775)

@@ -8,7 +8,7 @@ from runner import run_dir, run_one
 from util import get_test_dir, wild_type
 
 nfiles = 100
-lim = 2*nfiles
+lim = 2 * nfiles
 
 
 def test_true():
@@ -24,6 +24,7 @@ def test_false():
 
 
 def test_empty():
+    open('empty', 'w').close()
     outcome, returncode = run_one('empty')
     assert outcome == 'silent '
     assert returncode == 0

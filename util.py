@@ -22,8 +22,11 @@ def get_test_dir(mutants_dir=None):
 
 
 def get_test_loci(n):
+    '''Return list of n, evenly-spaced loci
+    along the length of the wild-type.
+    '''
     length = os.path.getsize(wild_type)
-    separation = length//n
+    separation = length // n
     return range(0, length, separation)[:n]
 
 
