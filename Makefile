@@ -17,7 +17,8 @@ lint: wild_type
 
 test: wild_type
 	@ touch empty
-	@ pytest test*.py experiment.py
+	@ pytest test*.py
+	@ pytest util.py
 	@ rm empty
 
 wild_type: /usr/bin/true
