@@ -1,7 +1,13 @@
 all: lint battleship.html
 
-battleship.html: wild_type
-	battleship.py
+%.html: %.py wild_type
+	$<
+
+clean:
+	rm -rf *.{mutants,results,html}
+
+distclean:
+	git clean -dfx
 
 lint:
 	@ isort *.py
