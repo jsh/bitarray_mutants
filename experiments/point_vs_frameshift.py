@@ -13,8 +13,8 @@ test_loci = get_test_loci(nfiles)
 
 
 def run_frameshift():
-    results = 'results.frameshift'
-    test_dir = get_test_dir()
+    results = 'frameshift.results'
+    test_dir = get_test_dir('frameshift.mutants')
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim, mode='list',
                  loci=test_loci, wt=wild_type,
@@ -27,8 +27,8 @@ def run_frameshift():
 
 
 def run_point():
-    results = 'results.point'
-    test_dir = get_test_dir()
+    results = 'point.results'
+    test_dir = get_test_dir('point.mutants')
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim, mode='list',
                  loci=test_loci, wt=wild_type,

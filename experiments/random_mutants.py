@@ -13,7 +13,7 @@ nfiles = 400
 
 def run_empty():
     results = 'empty.results'
-    test_dir = get_test_dir()
+    test_dir = get_test_dir('empty.mutants')
     os.chdir(test_dir)
     make_mutants(nfiles, lim=2 * nfiles, mode='random',
                  wt=wild_type, mutation=mutate.empty)
@@ -26,7 +26,7 @@ def run_empty():
 
 def run_frameshift():
     results = 'frameshift.results'
-    test_dir = get_test_dir()
+    test_dir = get_test_dir('frameshift.mutants')
     os.chdir(test_dir)
     make_mutants(nfiles, lim=2 * nfiles, mode='random',
                  wt=wild_type, mutation=mutate.frameshift)
@@ -39,7 +39,7 @@ def run_frameshift():
 
 def run_point():
     results = 'point.results'
-    test_dir = get_test_dir()
+    test_dir = get_test_dir('point.mutants')
     os.chdir(test_dir)
     make_mutants(nfiles, lim=2 * nfiles, mode='random',
                  wt=wild_type, mutation=mutate.point)
