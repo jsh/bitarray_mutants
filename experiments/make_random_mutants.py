@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+'''Make random mutants of all three types.'''
 
 import os
 
@@ -41,20 +42,6 @@ def run_point():
     test_dir = get_test_dir()
     os.chdir(test_dir)
     make_mutants(nfiles, lim=2 * nfiles, mode='random',
-                 wt=wild_type, mutation=mutate.point)
-    os.chdir('..')
-    run_dir(test_dir, results)
-    assert os.path.isfile(results)
-    with open(results, 'r') as f:
-        assert len(list(f)) == nfiles
-
-
-def run_list():
-    results = 'list.results'
-    test_dir = get_test_dir()
-    os.chdir(test_dir)
-    loci = os.path.getsize(wild_type) % 400
-    make_mutants(nfiles, mode='list', loci=loci,
                  wt=wild_type, mutation=mutate.point)
     os.chdir('..')
     run_dir(test_dir, results)
