@@ -20,14 +20,14 @@ nfiles = 400
 test_loci = get_test_loci(nfiles)
 
 
-def run_screen(mutation='point'):
+def run_screen(mutation='point', mutagen=mutate.point):
     '''generate mutants, record results'''
     results = mutation + '.results'
     test_dir = get_test_dir(mutation + '.mutants')
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim, mode='list',
                  loci=test_loci, wt=wild_type,
-                 mutation=mutate.point)
+                 mutagen=mutagen)
     os.chdir('..')
     run_dir(test_dir, results)
     assert os.path.isfile(results)

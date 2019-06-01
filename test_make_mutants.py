@@ -46,7 +46,7 @@ def test_make_point_mutants_random():
     test_dir = get_test_dir()
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim, mode='random',
-                 wt=wild_type, mutation=mutate.point)
+                 wt=wild_type, mutagen=mutate.point)
     os.chdir('..')
 
     assert sum(True for mutant in get_mutants(test_dir)) == nfiles

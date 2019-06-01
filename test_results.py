@@ -19,7 +19,7 @@ def run_empty():
     outfile = 'empty.results'
     mutants = get_test_dir('empty.mutants')
     os.chdir(mutants)
-    make_mutants(nfiles, wt=wild_type, mutation=mutate.empty)
+    make_mutants(nfiles, wt=wild_type, mutagen=mutate.empty)
     os.chdir('..')
     run_dir(mutants, outfile)
 

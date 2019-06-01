@@ -11,7 +11,7 @@ def make_mutants(
                  n=0,
                  lim=None,
                  mode='serial',
-                 mutation=mutate.empty,
+                 mutagen=mutate.empty,
                  wt=mutate.wild_type,
                  loci=None
                  ):
@@ -35,7 +35,7 @@ def make_mutants(
         directory = os.path.dirname(path) or '.'
         if not os.path.isdir(directory):
             os.makedirs(directory)
-        mutation(wt=wt, mut=path, pos=i)
+        mutagen(wt=wt, mut=path, pos=i)
 
 
 def get_mutants(directory):
