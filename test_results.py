@@ -25,6 +25,7 @@ def run_empty():
 
 
 def test_get_results():
+    '''Check that there are nfiles results, all successful.'''
     run_empty()
     results = get_results('empty.mutants', 'empty.results')
     assert len(results) == nfiles
