@@ -64,7 +64,7 @@ def main():
     process_mutants = [r for r in rlist if is_process(r)]
     oserror_mutants = [r for r in rlist if is_oserror(r)]
     neutrals = go.Bar(
-        name='Neutral',
+        name='None',
         x=[r[0] for r in silents],
         y=[1 for r in silents]
     )
@@ -81,7 +81,7 @@ def main():
     data = [neutrals, processes, oserrors]
     layout = go.Layout(
         barmode='group',
-        title='Mutations by Type'
+        title='Mutations by Exception Class'
     )
     fig = go.Figure(data=data, layout=layout)
     po.plot(fig, filename=sys.argv[0].replace('.py', '.html'), auto_open=True)

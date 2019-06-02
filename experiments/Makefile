@@ -1,4 +1,4 @@
-all: lint battleship.html
+all: lint battleship.html causes_of_death.html frameshift_errors.html
 
 export PYTHONPATH := ..
 

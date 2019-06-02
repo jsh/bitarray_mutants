@@ -81,22 +81,22 @@ def main():
     segfault_mutants = [r for r in rlist if (is_process(r) and is_segfault(r))]
     stillborn_mutants = [r for r in rlist if is_oserror(r)]
     neutrals = go.Bar(
-        name='Neutral',
+        name='Old Age',
         x=[r[0] for r in neutral_mutants],
         y=[1 for r in neutral_mutants]
     )
     killed = go.Bar(
-        name='Killed',
+        name='Suicide',
         x=[r[0] for r in killed_mutants],
         y=[1 for r in killed_mutants]
     )
     bad_libs = go.Bar(
-        name='Libs',
+        name='Malnutrition',
         x=[r[0] for r in library_mutants],
         y=[1 for r in library_mutants]
     )
     segfaults = go.Bar(
-        name='Segfaults',
+        name='Insanity',
         x=[r[0] for r in segfault_mutants],
         y=[1 for r in segfault_mutants]
     )
@@ -108,7 +108,7 @@ def main():
     data = [neutrals, killed, segfaults, bad_libs, stillborn]
     layout = go.Layout(
         barmode='group',
-        title='Mutations by Type'
+        title='Causes of Death'
     )
     fig = go.Figure(data=data, layout=layout)
     po.plot(fig, filename=sys.argv[0].replace('.py', '.html'), auto_open=True)

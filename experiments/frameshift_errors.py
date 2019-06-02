@@ -70,17 +70,11 @@ def is_killed(r):
 def main():
     '''The driver.'''
     rlist = results_to_list('point')
-    neutral_mutants = [r for r in rlist if is_silent(r)]
     killed_mutants = [r for r in rlist if (is_process(r) and is_killed(r))]
     nonsense_mutants = [r for r in rlist if (is_process(r) and is_nonsense(r))]
     stillborn_mutants = [r for r in rlist if is_oserror(r)]
-    neutrals = go.Bar(
-        name='Neutral',
-        x=[r[0] for r in neutral_mutants],
-        y=[1 for r in neutral_mutants]
-    )
     killed = go.Bar(
-        name='Killed',
+        name='Suicide',
         x=[r[0] for r in killed_mutants],
         y=[1 for r in killed_mutants]
     )
@@ -94,10 +88,10 @@ def main():
         x=[r[0] for r in stillborn_mutants],
         y=[1 for r in stillborn_mutants]
     )
-    data = [neutrals, killed, nonsense, stillborn]
+    data = [killed, nonsense, stillborn]
     layout = go.Layout(
         barmode='group',
-        title='Mutations by Type'
+        title='Frameshift Mutations by Type'
     )
     fig = go.Figure(data=data, layout=layout)
     po.plot(fig, filename=sys.argv[0].replace('.py', '.html'), auto_open=True)
