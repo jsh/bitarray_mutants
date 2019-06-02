@@ -1,5 +1,7 @@
 all: lint battleship.html
 
+export PYTHONPATH := ..
+
 %.html: %.py wild_type
 	$<
 
