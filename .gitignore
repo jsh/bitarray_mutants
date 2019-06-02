@@ -1,6 +1,8 @@
 *.html
+*.mutants
+*.results
+*.swp
 .pytest_cache
 __pycache__
-mutant
-results
 wild_type
+
