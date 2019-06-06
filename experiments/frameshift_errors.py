@@ -20,14 +20,15 @@ nfiles = 400
 test_loci = get_test_loci(nfiles)
 
 
-def run_screen(mutation='frameshift', mutagen=mutate.frameshift):
+def run_screen(mutation='frameshift', mutagen=mutate.frameshift,
+               direction='+'):
     '''generate mutants, record results'''
     results = mutation + '.results'
     test_dir = get_test_dir(mutation + '.mutants')
     os.chdir(test_dir)
     make_mutants(nfiles, lim=lim, mode='list',
                  loci=test_loci, wt=wild_type,
-                 mutagen=mutagen)
+                 mutagen=mutagen, direction=direction)
     os.chdir('..')
     run_dir(test_dir, results)
     assert os.path.isfile(results)
@@ -35,9 +36,9 @@ def run_screen(mutation='frameshift', mutagen=mutate.frameshift):
         assert len(list(f)) == nfiles
 
 
-def results_to_list(mutation='point'):
+def results_to_list(mutation='frameshift', direction='+'):
     '''return results as list'''
-    run_screen(mutation)
+    run_screen(mutation, direction=direction)
     rlist = get_results(mutation + '.mutants', mutation + '.results')
     return rlist
 
@@ -67,16 +68,25 @@ def is_killed(r):
     return r[2] == '-9'
 
 
-def main():
-    '''The driver.'''
-    rlist = results_to_list('point')
+def is_library(r):
+    '''Can't load dynamic library.'''
+    return r[2] == '-6'
+
+
+def graph_it(rlist, title='Causes of Death'):
     killed_mutants = [r for r in rlist if (is_process(r) and is_killed(r))]
     nonsense_mutants = [r for r in rlist if (is_process(r) and is_nonsense(r))]
     stillborn_mutants = [r for r in rlist if is_oserror(r)]
+    starved_mutants = [r for r in rlist if is_library(r)]
     killed = go.Bar(
         name='Suicide',
         x=[r[0] for r in killed_mutants],
         y=[1 for r in killed_mutants]
+    )
+    starved = go.Bar(
+        name='Starved',
+        x=[r[0] for r in starved_mutants],
+        y=[1 for r in starved_mutants]
     )
     nonsense = go.Bar(
         name='Nonsense',
@@ -88,13 +98,23 @@ def main():
         x=[r[0] for r in stillborn_mutants],
         y=[1 for r in stillborn_mutants]
     )
-    data = [killed, nonsense, stillborn]
+    data = [killed, nonsense, stillborn, starved]
     layout = go.Layout(
         barmode='group',
-        title='Frameshift Mutations by Type'
+        title=title
     )
     fig = go.Figure(data=data, layout=layout)
     po.plot(fig, filename=sys.argv[0].replace('.py', '.html'), auto_open=True)
+
+
+def main():
+    '''The driver.'''
+    rlist = results_to_list('frameshift', '+')
+    graph_it(rlist,
+             title='Causes of Death for Frameshift Mutants ("+")')
+    rlist = results_to_list('frameshift', '-')
+    graph_it(rlist,
+             title='Causes of Death for Frameshift Mutants ("-")')
 
 
 if __name__ == '__main__':

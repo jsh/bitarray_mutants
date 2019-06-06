@@ -30,7 +30,7 @@ def test_point():
     os.remove(mutate.mutant)
 
 
-def test_frameshift():
+def test_frameshift_plus():
     mutate.frameshift(wt=mutate.wild_type, mut=mutate.mutant, pos=10)
     wt_bna = bitarray()
     with open(mutate.wild_type, 'rb') as f:
@@ -42,5 +42,22 @@ def test_frameshift():
 
     assert os.path.getsize(mutate.mutant) == (
         os.path.getsize(mutate.wild_type) + 1)
+
+    os.remove(mutate.mutant)
+
+
+def test_frameshift_minus():
+    mutate.frameshift(wt=mutate.wild_type, mut=mutate.mutant, pos=10,
+                      direction='-')
+    wt_bna = bitarray()
+    with open(mutate.wild_type, 'rb') as f:
+        wt_bna.fromfile(f)
+
+    mut_bna = bitarray()
+    with open(mutate.mutant, 'rb') as f:
+        mut_bna.fromfile(f)
+
+    assert os.path.getsize(mutate.mutant) == (
+        os.path.getsize(mutate.wild_type))
 
     os.remove(mutate.mutant)

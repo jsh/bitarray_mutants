@@ -11,25 +11,30 @@ blank = bitarray(wt_bitcount)
 blank.setall(0)
 
 
-def empty(wt=None, mut=None, pos=None):
+def empty(wt=None, mut=None, pos=None, direction=None):
     _, _ = wt, pos  # unused
     f = open(mut, 'w')
     f.close()
     os.chmod(mut, 0o775)
 
 
-def frameshift(wt=wild_type, mut=mutant, pos=None):
+def frameshift(wt=wild_type, mut=mutant, pos=None, direction='+'):
     bna = bitarray()
     with open(wt, 'rb') as f:
         bna.fromfile(f)
-    if pos is not None:
+    if pos is None:
+        pass
+    elif direction == '+':
         bna.insert(pos, False)
+    elif direction == '-':
+        bna.pop(pos)
+
     with open(mut, 'wb') as f:
         bna.tofile(f)
     os.chmod(mut, 0o775)
 
 
-def point(wt=wild_type, mut=mutant, pos=None):
+def point(wt=wild_type, mut=mutant, pos=None, direction=None):
     bna = bitarray()
     with open(wt, 'rb') as f:
         bna.fromfile(f)
