@@ -2,7 +2,10 @@ all: lint battleship.html causes_of_death.html frameshift_errors.html
 
 export PYTHONPATH := ..
 
-%.html: %.py wild_type
+%: %.py wild_type
+	$<
+
+%.html: %.py wild_type  # if the graph is newer than the python program, don't regenerate
 	$<
 
 clean:
@@ -18,5 +21,5 @@ lint:
 wild_type: /usr/bin/true
 	@ cp /usr/bin/true wild_type
 
-.PHONY: all lint
+.PHONY: all clean distclean lint
 
