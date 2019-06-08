@@ -21,13 +21,16 @@ def get_test_dir(mutants_dir=None):
     return mutants_dir
 
 
-def get_test_loci(n):
-    '''Return list of n, evenly-spaced loci
-    along the length of the wild-type.
+def get_test_loci(n, start=0):
+    '''Return list of n, evenly-spaced loci,
+    beginning at start
+    along the length of the wild-type,
     '''
     length = os.path.getsize(wild_type)
-    separation = length // n
-    return range(0, length, separation)[:n]
+    spacing = length//n
+    assert start in range(spacing), "start outside range({})".format(spacing)
+    g = [i for i in range(length) if i % spacing == start]
+    return g[:n]
 
 
 def get_path(n, width):
