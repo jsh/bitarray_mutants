@@ -12,13 +12,13 @@ lim = 2 * nfiles
 
 
 def test_true():
-    outcome, returncode = run_one('/usr/bin/true')
+    outcome, returncode = run_one('true')
     assert outcome == 'silent '
     assert returncode == 0
 
 
 def test_false():
-    outcome, returncode = run_one('/usr/bin/false')
+    outcome, returncode = run_one('false')
     assert outcome == 'process'
     assert returncode == 1
 
