@@ -1,8 +1,5 @@
 TRUE := $(shell which true)
 
-foo:
-	echo $(TRUE)
-
 all: lint test experiment
 
 clean:
