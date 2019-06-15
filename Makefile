@@ -1,3 +1,8 @@
+TRUE := $(shell which true)
+
+foo:
+	echo $(TRUE)
+
 all: lint test experiment
 
 clean:
@@ -21,8 +26,8 @@ test: wild_type
 	pytest util.py
 	rm empty
 
-wild_type: /usr/bin/true
-	cp /usr/bin/true wild_type
+wild_type: $(TRUE)
+	cp $(TRUE) wild_type
 
 .PHONY: clean lint test experiment
 .SILENT:                             # don't echo commands
