@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''Classify run results by type.'''
 # pylint: disable=C0413
 
@@ -106,7 +106,7 @@ def graph_it(rlist, start, title='Causes of Death'):
         title=title
     )
     fig = go.Figure(data=data, layout=layout)
-    po.plot(fig, filename=sys.argv[0].replace('.py', '.html'), auto_open=True)
+    po.plot(fig, filename=sys.argv[0].replace('.py', '.html'), auto_open=False)
 
 
 def battleship(start=0):

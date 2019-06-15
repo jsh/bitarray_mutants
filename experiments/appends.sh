@@ -6,6 +6,8 @@ same-size-1_23() (( $(sizeof $1) == $(sizeof $2) + $(sizeof $3) ))  # size of th
 
 # create sandbox
 mkdir testappends; pushd $_ >/dev/null
+PATH+=:   # add $PWD to $PATH
+
 trap 'popd > /dev/null; rm -rf testappends' EXIT
 trap 'echo FAIL' ERR
 

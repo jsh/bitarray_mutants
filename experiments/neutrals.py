@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''Classify run results by type.'''
 # pylint: disable=C0413
 

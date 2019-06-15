@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''Classify run results by type.'''
 # pylint: disable=C0413
 
@@ -111,7 +111,7 @@ def main():
         title='Causes of Death'
     )
     fig = go.Figure(data=data, layout=layout)
-    po.plot(fig, filename=sys.argv[0].replace('.py', '.html'), auto_open=True)
+    po.plot(fig, filename=sys.argv[0].replace('.py', '.html'), auto_open=False)
 
 
 if __name__ == '__main__':

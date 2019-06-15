@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import plotly.graph_objs as go
 import plotly.offline as po
