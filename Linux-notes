@@ -1,8 +1,17 @@
+# Install a couple of Ubuntu packages
 sudo apt upgrade
 sudo apt install python3-pip
+sudo apt install make
+
+# Put python tools and modules in your path
 pip3 install pytest
 pip3 install plotly
-sudo apt install make
-PATH+=:/home/jeffrey_haemer_gmail_com/.local/bin/pytest
+PATH+=:~/.local/bin/pytest
+
+# Get the code
+git clone https://github.com/jsh/bitarray_mutants.git
+exit
+
+# Pull down graphs from the server and display them.
 gcloud compute scp the-truth:~/bitarray_mutants/experiments/causes_of_death.html .
 open $PWD/causes_of_death.html
