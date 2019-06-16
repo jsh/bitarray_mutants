@@ -1,0 +1,8 @@
+sudo apt upgrade
+sudo apt install python3-pip
+pip3 install pytest
+pip3 install plotly
+sudo apt install make
+PATH+=:/home/jeffrey_haemer_gmail_com/.local/bin/pytest
+gcloud compute scp the-truth:~/bitarray_mutants/experiments/causes_of_death.html .
+open $PWD/causes_of_death.html
