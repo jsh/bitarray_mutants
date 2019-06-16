@@ -5,6 +5,9 @@ all: lint test experiment
 clean:
 	git clean -dfx
 
+distclean: clean
+	$(MAKE) -C experiments distclean
+
 graph-mutants.html: graph-mutants.py
 	./graph-mutants.py
 
