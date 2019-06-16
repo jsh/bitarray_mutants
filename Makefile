@@ -1,19 +1,12 @@
 TRUE := $(shell which true)
 
-all: lint test experiment
+all: lint test
 
 clean:
 	git clean -dfx
 
 distclean: clean
 	$(MAKE) -C experiments distclean
-
-graph-mutants.html: graph-mutants.py
-	./graph-mutants.py
-
-result.experiment: result.empty result.frameshift result.point
-	./experiment.py
-	touch result.experiment
 
 lint: wild_type
 	isort *.py
@@ -29,5 +22,5 @@ test: wild_type
 wild_type: $(TRUE)
 	cp $(TRUE) wild_type
 
-.PHONY: clean lint test experiment
+.PHONY: clean distclean lint test
 .SILENT:                             # don't echo commands

@@ -1,10 +1,11 @@
 TRUE := $(shell which true)
+export PYTHONPATH := ..
 
 all: appends graphs
 
-graphs: battleship.html causes_of_death.html plus_and_minus_frameshifts.html battleship_with_frameshifts.html
+graphs: battleship.html battleship_with_frameshifts.html causes_of_death.html plus_and_minus_frameshifts.html
 
-export PYTHONPATH := ..
+other: neutrals random_mutants
 
 %: %.py wild_type
 	./$<
@@ -28,5 +29,5 @@ lint:
 wild_type: $(TRUE)
 	cp $(TRUE) wild_type
 
-.PHONY: all clean distclean lint
+.PHONY: all clean distclean graphs other lint
 .SILENT:                              # don't echo any commands
