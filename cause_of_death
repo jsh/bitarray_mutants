@@ -1,0 +1,6 @@
+old-age silent 0			# runs to completion
+stillborn oserror 0			# can't even start
+court-martial process -4		# issues an illegal instruction
+suicide process -9			# kills itself
+malnutrition process -6			# can't access a library it needs
+insanity process -11			# goes somewhere that doesn't exist

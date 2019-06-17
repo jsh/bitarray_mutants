@@ -35,8 +35,11 @@ def run_one(code):
     return (outcome, returncode)
 
 
-def run_dir(directory, results):
+def screen(mutation_type):
+    '''Make a set of mutants and run them.'''
+    make_mutants(wild_type, mutation_type, loci(len(wild_type), n, dist, start=0))
     with open(results, 'w') as f:
-        for mutant in get_mutants(directory):
+        for mutant in get_mutants(dir):
             outcome, returncode = run_one(mutant)
             f.write('{}\t{}\t{:>3d}\n'.format(mutant, outcome, returncode))
+        return(get_results_file(mutation_type))
