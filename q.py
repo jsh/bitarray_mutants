@@ -35,23 +35,22 @@ class Q:
         os.chmod(filename, 0o775)
 
 
-    def mutate(self, pos, mutation_type='point', **kwargs):
-        mutant = self.copy()
-
+    def mutate(self, pos, mutation_type='point', bit=False, **kwargs):
         if mutation_type == 'none':
             pass
         elif mutation_type == 'point':
-            mutant.bna[pos] = not mutant.bna[pos]
+            self.bna[pos] = not self.bna[pos]
         elif mutation_type == 'frameshift':
             if kwargs['sense'] == '-':
-                print('+ mutant')
+                self.bna.pop(pos)
             elif kwargs['sense'] == '+':
-                print('- mutant')
+                try:
+                    self.bna.insert(pos, bit)   # False (default) inserts 0, True inserts 1
+                except:
+                    print('cannot insert ', bit)
             else:
                 print('bad sense %s\n' % kwargs['sense'])
                 raise ValueError
         else:
             print('bad mutation_type %s\n" % mutation_type')
             raise ValueError
-
-        return mutant

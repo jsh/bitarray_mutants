@@ -45,8 +45,19 @@ def test_filops():
 
 
 def test_mutate():
-    wt = Q('1'*8)
+    size = 8
+    wt = Q('1'*size)
     mut = wt.copy()
+    empty = Q('0'*size)
+
     for i in range(len(wt)):
-        mutant = mut.mutate(i)
-    assert mutant == wt.empty()
+        mut.mutate(i)
+    assert mut.bna == empty.bna
+    assert len(mut) == size
+
+    mut.mutate(2, mutation_type='frameshift', sense='+', bit=True)
+    print(mut.bna)
+    assert len(mut) == size + 1
+    assert mut.bna == Q('001000000').bna
+    mut.mutate(2, mutation_type='frameshift', sense='-')
+    assert mut.bna == empty.bna
