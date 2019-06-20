@@ -5,47 +5,33 @@ import os
 from bitarray import bitarray
 
 
-class Q:
-    def __init__(self, seq = ''):
-        self.bna = bitarray(seq)
-
-
-    def __len__(self):
-        return len(self.bna)
-
-
-    def copy(self):
-        copy = Q()
-        copy.bna = self.bna.copy()
-        return copy
-
+class Q(bitarray):
+    def __init__(self, seq=''):
+        super().__init__()
 
     def empty(self):
-        self.bna.setall(False)
-
-
-    def fromfile(self, filename):
-        with open(filename, 'br') as f:
-            self.bna.fromfile(f)
-
+        self.setall(False)
 
     def tofile(self, filename):
         with open(filename, 'bw') as f:
-            self.bna.tofile(f)
+            super().tofile(f)
         os.chmod(filename, 0o775)
 
+    def fromfile(self, filename):
+        with open(filename, 'br') as f:
+            super().fromfile(f)
 
     def mutate(self, pos, mutation_type='point', bit=False, **kwargs):
         if mutation_type == 'none':
             pass
         elif mutation_type == 'point':
-            self.bna[pos] = not self.bna[pos]
+            self[pos] = not self[pos]
         elif mutation_type == 'frameshift':
             if kwargs['sense'] == '-':
-                self.bna.pop(pos)
+                self.pop(pos)
             elif kwargs['sense'] == '+':
                 try:
-                    self.bna.insert(pos, bit)   # False (default) inserts 0, True inserts 1
+                    self.insert(pos, bit)   # False (default) inserts 0, True inserts 1
                 except:
                     print('cannot insert ', bit)
             else:

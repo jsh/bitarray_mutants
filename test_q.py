@@ -2,18 +2,19 @@
 
 import filecmp
 import os
+import pytest
 import sys
 
 from bitarray import bitarray
 
+import q
 from q import Q
 
 
 def test_Q():
-    for val in ['', '1'*8]:
+    for val in ['', '1'*8, False*2]:
         q = Q(val)
-        q.bna = bitarray(val)
-
+        assert q == bitarray(val)
 
 def test_len():
     size = 256
@@ -25,22 +26,26 @@ def test_empty():
     q0 = Q('0'*8)
     q1 = Q('1'*8)
     q1.empty()
-    assert q0.bna == q1.bna
+    assert q0 == q1
 
 
 def test_copy():
     q1 = Q('11111111')
     q2 = q1.copy()
-    assert q1 != q2
-    assert q1.bna == q2.bna
+    assert q1 == q2
 
    
 def test_filops():
+    orig = 'README.md'
     copy = 'copy'
     q = Q()
-    q.fromfile(sys.argv[0])
-    q.tofile(copy)
-    assert filecmp.cmp(sys.argv[0], copy, shallow=False)
+    try:
+        q.fromfile(orig)
+        q.tofile(copy)
+    except Exception as err:
+        sys.exit(err)
+
+    assert filecmp.cmp(orig, copy, shallow=False)
     os.remove(copy)
 
 
@@ -52,12 +57,12 @@ def test_mutate():
 
     for i in range(len(wt)):
         mut.mutate(i)
-    assert mut.bna == empty.bna
+    assert mut == empty
     assert len(mut) == size
 
     mut.mutate(2, mutation_type='frameshift', sense='+', bit=True)
-    print(mut.bna)
+    print(mut)
     assert len(mut) == size + 1
-    assert mut.bna == Q('001000000').bna
+    assert mut == Q('001000000')
     mut.mutate(2, mutation_type='frameshift', sense='-')
-    assert mut.bna == empty.bna
+    assert mut == empty
