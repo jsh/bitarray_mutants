@@ -2,12 +2,10 @@
 
 import filecmp
 import os
-import pytest
 import sys
 
 from bitarray import bitarray
 
-import q
 from q import Q
 
 
