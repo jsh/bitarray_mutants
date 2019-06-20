@@ -34,7 +34,7 @@ def test_copy():
 
    
 def test_filops():
-    orig = 'README.md'
+    orig = __file__
     copy = 'copy'
     q = Q()
     try:
