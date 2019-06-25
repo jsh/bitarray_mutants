@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import sys
+
 from nutil import path_to_int
 
 if __name__ == '__main__':

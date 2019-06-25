@@ -3,6 +3,8 @@
 import os
 import shutil
 
+from bitarray import bitarray
+
 wild_type = os.path.join(os.getcwd(), 'wild_type')
 
 
@@ -24,6 +26,7 @@ def get_mutant_dir(mutation_type):
 def get_results_file(mutation_type):
     '''Return results name of results file.'''
     return os.path.join(get_mutants_dir(mutation_type), 'results')
+
 
 def path_to_int(path):
     '''Transform a path into a decimal position.
@@ -60,3 +63,11 @@ def int_to_path(n, width):
     s = format(n, fmt)
     assert len(s) <= width
     return '/'.join([s[i:i+2] for i in range(0, len(s), 2)])
+
+
+def file_to_bitarray(file):
+    with open(file, 'rb') as f:
+        b = bitarray()
+        b.fromfile(f)
+        
+    return b
