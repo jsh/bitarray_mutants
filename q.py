@@ -13,6 +13,9 @@ class Q(bitarray):
         self.setall(False)
 
     def tofile(self, filename):
+        directory = os.path.dirname(filename) or '.'
+        if not os.path.isdir(directory):
+            os.makedirs(directory)
         with open(filename, 'bw') as f:
             super().tofile(f)
         os.chmod(filename, 0o775)
