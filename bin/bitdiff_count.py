@@ -3,7 +3,7 @@
 import os
 import sys
 
-from nutil import file_to_bitarray
+from util import file_to_bitarray
 
 
 if __name__ == '__main__':

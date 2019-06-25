@@ -2,7 +2,7 @@
 
 import sys
 
-from nutil import path_to_int
+from util import path_to_int
 
 if __name__ == '__main__':
     assert len(sys.argv) == 2, "usage: %s <path>" % sys.argv[0]

@@ -3,7 +3,7 @@
 import os
 
 from loci import get_loci
-from nutil import get_dir, int_to_path
+from util import get_dir, int_to_path
 from q import Q
 
 
