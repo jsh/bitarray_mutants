@@ -8,24 +8,18 @@ from bitarray import bitarray
 wild_type = os.path.join(os.getcwd(), 'wild_type')
 
 
-def get_mutant_dir(mutation_type):
-    '''Return name of directory of mutants.
-
-    Make it if it doesn't already exist.
-    '''
-    if mutants_dir is None:
-        mutants_dir = os.path.join(os.getcwd(), mutation_type)
+def get_dir(dirname):
+    '''Mkdir, removing it if it already exists.'''
     try:
-        os.mkdir(mutants_dir)
+        os.mkdir(dirname)
     except FileExistsError:
-        shutil.rmtree(mutants_dir)
-        os.mkdir(mutants_dir)
-    return mutants_dir
+        shutil.rmtree(dirname)
+        os.mkdir(dirname)
 
 
-def get_results_file(mutation_type):
+def get_results_file(dirname):
     '''Return results name of results file.'''
-    return os.path.join(get_mutants_dir(mutation_type), 'results')
+    return os.path.join(dirname, 'results')
 
 
 def path_to_int(path):
