@@ -3,37 +3,41 @@
 import os
 import shutil
 
+from bitarray import bitarray
+
 wild_type = os.path.join(os.getcwd(), 'wild_type')
 
 
-def get_test_dir(mutants_dir=None):
-    '''Return name of directory of mutants.
-    Make it if it doesn't already exist.
-    '''
-    if mutants_dir is None:
-        mutants_dir = os.path.join(os.getcwd(), 'td')
+def get_dir(dirname):
+    '''Mkdir, removing it if it already exists.'''
     try:
-        os.mkdir(mutants_dir)
+        os.mkdir(dirname)
     except FileExistsError:
-        shutil.rmtree(mutants_dir)
-        os.mkdir(mutants_dir)
-
-    return mutants_dir
+        shutil.rmtree(dirname)
+        os.mkdir(dirname)
 
 
-def get_test_loci(n, start=0):
-    '''Return list of n, evenly-spaced loci,
-    beginning at start
-    along the length of the wild-type,
+def get_results_file(dirname):
+    '''Return results name of results file.'''
+    return os.path.join(dirname, 'results')
+
+
+def path_to_int(path):
+    '''Transform a path into a decimal position.
+
+    >>> path_to_int('0a')
+    10
+    >>> path_to_int('00/0a')
+    10
+    >>> path_to_int('00/a')
+    10
+    >>> path_to_int('00/00/00/00/0f')
+    15
     '''
-    length = os.path.getsize(wild_type)
-    spacing = length//n
-    assert start in range(spacing), "start outside range({})".format(spacing)
-    g = [i for i in range(length) if i % spacing == start]
-    return g[:n]
+    return int(path.replace('/', ''), 16)
 
 
-def get_path(n, width):
+def int_to_path(n, width):
     '''Make a filepath representing an int
     Convert the int to hex,
     Split the hex number into a filepath,
@@ -42,36 +46,22 @@ def get_path(n, width):
     If width > 4, use first four hex digits for two levels
     so 0 -> 00000...0 -> ('00/00', '0...0')
 
-    >>> get_path(10, 2)
+    >>> int_to_path(10, 2)
     '0a'
-    >>> get_path(0,3)
+    >>> int_to_path(0, 3)
     '00/0'
-    >>> get_path(15,10)
-    '00/00/00000f'
+    >>> int_to_path(15, 10)
+    '00/00/00/00/0f'
     '''
     fmt = '0' + str(width) + 'x'
     s = format(n, fmt)
     assert len(s) <= width
-    p = list(s)
-    if width > 4:
-        p.insert(4, '/')
-    if width > 2:
-        p.insert(2, '/')
-    return ''.join(p)
+    return '/'.join([s[i:i+2] for i in range(0, len(s), 2)])
 
 
-def get_pos(path, root=''):
-    '''Transform a path into a decimal position.
-
-    >>> get_pos('0a')
-    10
-    >>> get_pos('00/0a')
-    10
-    >>> get_pos('00/00/00000f')
-    15
-    >>> get_pos('a/b/c/00/00/00000f', root='a/b/c')
-    15
-    '''
-    relpath = os.path.relpath(path, root)
-    relpath = relpath.replace('/', '')
-    return int(relpath, 16)
+def file_to_bitarray(file):
+    with open(file, 'rb') as f:
+        b = bitarray()
+        b.fromfile(f)
+        
+    return b
