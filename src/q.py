@@ -6,6 +6,7 @@ from bitarray import bitarray
 
 
 class Q(bitarray):
+
     def __init__(self, *args, **kwargs):
         super().__init__()
 

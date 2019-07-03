@@ -45,4 +45,3 @@ def get_loci(n, length, start=0, dist='uniform'):
     else:
         print("Unknown dist type: %s" % dist)
         raise ValueError
-
