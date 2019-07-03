@@ -9,7 +9,7 @@ wild_type = os.path.join(os.getcwd(), 'wild_type')
 
 
 def get_dir(dirname):
-    '''Mkdir, removing it if it already exists.'''
+    '''Mkdir, first removing older versions if needed.'''
     try:
         os.mkdir(dirname)
     except FileExistsError:

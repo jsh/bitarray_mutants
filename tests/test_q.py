@@ -6,7 +6,7 @@ import sys
 
 from bitarray import bitarray
 
-from q import Q
+from src.q import Q
 
 
 def test_Q():
