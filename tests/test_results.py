@@ -3,8 +3,6 @@
 import os
 import shutil
 
-import mutate
-from make_mutants import make_mutants
 from results import get_results
 from runner import run_dir
 from util import get_test_dir, wild_type

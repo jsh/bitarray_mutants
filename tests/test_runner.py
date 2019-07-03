@@ -2,8 +2,6 @@
 
 import os
 
-import mutate
-from make_mutants import make_mutants
 from runner import run_dir, run_one
 from util import get_test_dir, wild_type
 

@@ -14,6 +14,7 @@ def test_Q():
         q = Q(val)
         assert q == bitarray(val)
 
+
 def test_len():
     size = 256
     q = Q('1'*size)
@@ -32,7 +33,7 @@ def test_copy():
     q2 = q1.copy()
     assert q1 == q2
 
-   
+
 def test_filops():
     orig = __file__
     copy = 'copy'

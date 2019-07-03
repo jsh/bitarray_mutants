@@ -1,27 +1,21 @@
 TRUE := $(shell which true)
-PYTHONPATH ?= :${PWD}/src
+export PYTHONPATH ?= ${PWD}/../src
 
 all: lint test
 
-clean:
-	git clean -dfx
-
-distclean: clean
-	$(MAKE) -C experiments distclean
-
-lint: wild_type
+lint:
 	isort *.py
 	pylama *.py
 	pylama -l radon *.py
 
 test: wild_type
-	touch empty
+	# touch empty
 	pytest test*.py
 	pytest util.py
-	rm empty
+	# rm empty
 
 wild_type: $(TRUE)
 	cp $(TRUE) wild_type
 
-.PHONY: clean distclean lint test
+.PHONY: lint test
 .SILENT:                             # don't echo commands

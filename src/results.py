@@ -3,7 +3,7 @@
 import os
 import sys
 
-DEATHS = 'cause_of_death'
+DEATHS = 'causes_of_death'
 
 def _causes_of_death():
     reasons = {}
