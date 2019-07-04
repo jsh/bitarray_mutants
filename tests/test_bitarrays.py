@@ -58,4 +58,4 @@ def test_bitops():
 def test_to01():
     s = '0111101'
     x = bitarray('10111101')
-    assertTrue int(x.to01()[2:]) == int(s)
+    assert int(x.to01()[2:]) == int(s)
