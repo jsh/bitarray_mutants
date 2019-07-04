@@ -3,8 +3,8 @@
 import os
 
 from loci import get_loci
-from runner import run_one
 from q import Q
+from runner import run_one
 from util import get_dir, int_to_path, path_to_int
 
 
