@@ -15,10 +15,7 @@ lint: wild_type
 	pylama -l radon *.py
 
 test: wild_type
-	touch empty
-	pytest test*.py
-	pytest util.py
-	rm empty
+	pytest
 
 wild_type: $(TRUE)
 	cp $(TRUE) wild_type
