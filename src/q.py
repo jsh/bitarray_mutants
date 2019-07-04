@@ -7,7 +7,7 @@ from bitarray import bitarray
 
 class Q(bitarray):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):  # pylint: disable=unused-argument
         super().__init__()
 
     def empty(self):
@@ -36,7 +36,7 @@ class Q(bitarray):
             elif kwargs['sense'] == '+':
                 try:
                     self.insert(pos, bit)   # False (default) inserts 0, True inserts 1
-                except:
+                except Exception:
                     print('cannot insert ', bit)
             else:
                 print('bad sense %s\n' % kwargs['sense'])

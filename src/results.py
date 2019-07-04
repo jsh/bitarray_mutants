@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-import os
-import sys
-
 DEATHS = 'causes_of_death'
 
 def _causes_of_death():
@@ -40,7 +37,7 @@ class Result:
     def cause_of_death(self):
         try:
             return Result.causes_of_death[self.outcome(), self.returncode()]
-        except:
+        except Exception:
             return 'unknown cause'
 
 def get_results(mutation_type):
