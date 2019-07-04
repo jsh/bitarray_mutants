@@ -1,3 +1,5 @@
+'''Create a list of loci with various distributions.'''
+
 def get_loci(n, length, start=0, dist='uniform'):
     '''Return list of n loci from 0 to n-1
     Distributions available include

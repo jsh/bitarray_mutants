@@ -1,4 +1,4 @@
-TRUE := $(shell which true)
+TRUE := $(shell which gtrue)
 PYTHONPATH ?= :${PWD}/src
 
 all: lint test

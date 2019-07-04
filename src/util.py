@@ -1,14 +1,25 @@
 #!/usr/bin/env python3
+'''Utility functions.
+
+>>> print(TRUE)
+/usr/bin/true
+>>> print(FALSE)
+/usr/bin/false
+>>> print(WILD_TYPE)
+/Users/jsh/Desktop/Python/bitarray_mutants/src/wild_type
+'''
 
 import os
 import shutil
 
 from bitarray import bitarray
 
-wild_type = os.path.join(os.getcwd(), 'wild_type')
+FALSE = shutil.which('false')
+TRUE = shutil.which('true')
+WILD_TYPE = os.path.join(os.getcwd(), 'wild_type')
 
 
-def get_dir(dirname):
+def create_dir(dirname):
     '''Mkdir, first removing older versions if needed.'''
     try:
         os.mkdir(dirname)
@@ -17,8 +28,12 @@ def get_dir(dirname):
         os.mkdir(dirname)
 
 
-def get_results_file(dirname):
-    '''Return results name of results file.'''
+def results_file(dirname):
+    '''Return results name of results file.
+    Does not create the file or require the file exist.
+    >>> print(results_file('whatever'))
+    whatever/results
+    '''
     return os.path.join(dirname, 'results')
 
 
@@ -38,7 +53,7 @@ def path_to_int(path):
 
 
 def int_to_path(n, width):
-    '''Make a filepath representing an int
+    '''Make a filepath representing an int.
     Convert the int to hex,
     Split the hex number into a filepath,
     return (directory, filename)
@@ -60,6 +75,8 @@ def int_to_path(n, width):
 
 
 def file_to_bitarray(file):
+    '''Read a file into a bitarray.
+    '''
     with open(file, 'rb') as f:
         b = bitarray()
         b.fromfile(f)

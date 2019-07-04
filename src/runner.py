@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+'''Run commands. Return outcomes and returncodes.'''
 
 import os
 import subprocess
@@ -19,17 +20,18 @@ def run_one(code):
     except subprocess.CalledProcessError as err:
         outcome = 'process'
         returncode = err.returncode
-    except OSError as err:
+    except OSError:
         if os.path.getsize(code) == 0:
             outcome = 'silent '  # subprocess bug
+            returncode = 0
         else:
             outcome = 'oserror'
-        returncode = None
+            returncode = None
     except subprocess.TimeoutExpired as err:
         outcome = 'timeout'
-        returncode = err.returncode
-    except Exception as err:     # some other misfortune
+        returncode = None
+    except Exception:     # some other misfortune
         outcome = 'exception'
-        returncode = err.returncode
+        returncode = None
 
     return (outcome, returncode)
