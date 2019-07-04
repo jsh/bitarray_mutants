@@ -6,7 +6,7 @@ def get_loci(n, length, start=0, dist='uniform'):
     extent: approximately a constant distance apart, covering the entire length
     random: what it says
     all: every position in the range
-    
+
 
     >>> list(get_loci(3,9))
     [0, 3, 6]
@@ -34,14 +34,14 @@ def get_loci(n, length, start=0, dist='uniform'):
         assert start <= spacing, "start [{}] > spacing [{}]".format(start, spacing)
 
         return (start + spacing*i for i in range(n))
-    elif dist == 'extent':
-        assert round(start + (length/n)*(n-1)) < length, "start [{}] > spacing [{}]".format(start, spacing)
+    if dist == 'extent':
+        err_msg = "start [{}] > spacing [{}]".format(start, spacing)
+        assert round(start + (length/n)*(n-1)) < length, err_msg
         return(start + round((length/n))*i for i in range(n))
-    elif dist == 'random':
+    if dist == 'random':
         import random
         return sorted(random.sample(range(length), n))
-    elif dist == 'all':
+    if dist == 'all':
         return range(length)
-    else:
-        print("Unknown dist type: %s" % dist)
-        raise ValueError
+    print("Unknown dist type: %s" % dist)
+    raise ValueError

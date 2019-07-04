@@ -63,5 +63,4 @@ def file_to_bitarray(file):
     with open(file, 'rb') as f:
         b = bitarray()
         b.fromfile(f)
-        
     return b

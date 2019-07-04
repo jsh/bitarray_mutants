@@ -19,7 +19,7 @@ class screen:
         self.maxpath = len(format(len(self.q), 'x'))
 
     def gen(self):
-        for locus in self.loci: 
+        for locus in self.loci:
             mutant = self.q.copy()
             mutant.mutate(locus)
             mutant.tofile(int_to_path(locus, self.maxpath))
