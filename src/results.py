@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+'''Report results.'''
 
 DEATHS = 'causes_of_death'
 
@@ -10,8 +11,9 @@ def _causes_of_death():
             reasons[outcome, returncode] = meaning
         return reasons
 
+causes_of_death = _causes_of_death()
+
 class Result:
-    causes_of_death = _causes_of_death()
 
     def __init__(self, s):
         self.data = s.split()
@@ -50,7 +52,9 @@ def get_results(mutation_type):
     return mutants
 
 def put_results(mutation_type):
-    pass
+    for mpath in s.enum():
+	outcome, returncode = run_one(mpath)
+	print(path_to_int(mpath), mpath, outcome, returncode)
     
 
 def main():
