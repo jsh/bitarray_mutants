@@ -1,5 +1,5 @@
-TRUE := $(shell which gtrue)
-PYTHONPATH ?= :${PWD}/src
+PYTHONPATH ?= :$(shell git rev-parse --top-level)/src
+WILD_TYPE := $(shell which gtrue)
 
 all: lint test
 
@@ -17,8 +17,8 @@ lint: wild_type
 test: wild_type
 	pytest
 
-wild_type: $(TRUE)
-	cp $(TRUE) wild_type
+wild_type: $(WILD_TYPE)
+	cp $(WILD_TYPE) wild_type
 
 .PHONY: clean distclean lint test
 .SILENT:                             # don't echo commands

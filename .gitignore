@@ -1,6 +1,7 @@
 *.html
 *.mutants
 *.results
+screen
 *.swp
 .pytest_cache
 __pycache__

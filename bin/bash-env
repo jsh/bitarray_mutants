@@ -1,2 +1,2 @@
-export PYTHONPATH=:$PWD/src
+export PYTHONPATH=:$(git rev-parse --show-toplevel)/src
 pyl() { pylint "$@" | head; }

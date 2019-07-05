@@ -1,0 +1,7 @@
+
+
+    '''
+    for mpath in s.enum():
+        outcome, returncode = run_one(mpath)
+        print(path_to_int(mpath), mpath, outcome, returncode)
+    '''

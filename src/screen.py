@@ -1,15 +1,16 @@
-#!/usr/bin/env python
-
-import os
+#!/usr/bin/env python3
+'''Module for handling mutant screens.'''
 
 from loci import get_loci
 from q import Q
-from runner import run_one
-from util import get_dir, int_to_path, path_to_int
+from util import int_to_path
 
 
-class screen:
+class Screen:
+    '''Object representing directory hierarchy of mutants.'''
+
     def __init__(self, wt, mutagen, nmutants):
+        '''Create the object, store input values.'''
         self.wt = wt
         self.mutagen = mutagen
         self.nmutants = nmutants
@@ -19,21 +20,12 @@ class screen:
         self.maxpath = len(format(len(self.q), 'x'))
 
     def gen(self):
+        '''Create all mutants.'''
         for locus in self.loci:
             mutant = self.q.copy()
             mutant.mutate(locus)
             mutant.tofile(int_to_path(locus, self.maxpath))
 
     def enum(self):
+        '''Something. NOTE: fill in.'''
         return [int_to_path(locus, self.maxpath) for locus in self.loci]
-
-if __name__ == '__main__':
-    nloci = 400
-    get_dir('screen')
-    os.chdir('screen')
-    s = screen('/usr/local/bin/gtrue', 'point', nloci)
-    s.gen()
-
-    for mpath in s.enum():
-        outcome, returncode = run_one(mpath)
-        print(path_to_int(mpath), mpath, outcome, returncode)
