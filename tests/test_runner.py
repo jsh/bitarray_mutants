@@ -2,9 +2,9 @@
 '''Unit-test module.'''
 
 import os
+
 from population import Population
 from runner import run_all, run_one
-from population import Population
 from util import FALSE, TRUE, WILD_TYPE, create_dir
 
 nfiles = 100
@@ -14,7 +14,7 @@ lim = 2 * nfiles
 def test_false():
     '''FALSE fails.'''
     _, outcome, returncode = run_one(FALSE)
-    assert outcome == 'process'
+    assert outcome == 'processerror'
     assert returncode == 1
 
 
@@ -37,6 +37,14 @@ def test_empty():
     open('empty', 'w').close()
     _, outcome, returncode = run_one('empty')
     assert outcome == 'silent '
+    assert returncode == 0
+
+
+def test_sha1_out():
+    '''Outcome is correct for something that has output.'''
+    _, outcome, returncode = run_one('echo ""')
+    empty_sha1 = os.popen('echo "" | sha1sum | sed "s/-//"').readline().strip()
+    assert outcome.strip() == empty_sha1
     assert returncode == 0
 
 

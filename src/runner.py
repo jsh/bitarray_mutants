@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 '''Run commands. Return outcomes and returncodes.'''
 
+import hashlib
 import os
+import shlex
 import subprocess
 
 
@@ -14,24 +16,30 @@ def _findfiles(directory='.'):
     return leafnodes
 
 
-def run_one(file):
+def run_one(file, output_type='sha1'):
     '''Run the file and report the result.'''
     timeout = 1  # second
 
     try:
         output = subprocess.check_output(
-            file,
+            shlex.split(file),
             timeout=timeout,
             stderr=subprocess.STDOUT)
-        outcome = 'output ' if output else 'silent '
+        if output and output_type == 'sha1':
+            h = hashlib.sha1(output)
+            outcome = h.hexdigest() + ' '
+        elif output:
+            outcome = output
+        else:
+            outcome = 'silent '
         # expect 'silent ' but who knows?
         returncode = 0
     except subprocess.CalledProcessError as err:
-        outcome = 'process'
+        outcome = 'processerror'
         returncode = err.returncode
     except OSError:
         if os.path.getsize(file) == 0:
-            outcome = 'silent '  # subprocess bug
+            outcome = 'silent '  # subprocess bug, success
             returncode = 0
         else:
             outcome = 'oserror'
